@@ -6,18 +6,29 @@ import time
 
 wn= turtle.Screen()
 wn.title("Tetris by @urmishukla")
-wn.bgcolor("black")
+wn.bgcolor("honeydew")
 wn.setup(width=600, height=800)
 wn.tracer(0)
+
 
 x=0
 #shape=[[4,4],[4,4]]
 
 writer = turtle.Turtle()
 writer.speed(0)
-writer.color("white")
-writer.goto(0,20)
-writer.write("TETRIS", move=False, align="left", font=("Helvetica", 32, "normal"))
+writer.hideturtle()
+writer.color("honeydew")
+writer.goto(-80,320)
+writer.color("black")
+writer.write("TETRIS",move=False, align="left", font=("Helvetica", 32, "normal"))
+
+pen1 = turtle.Turtle()
+pen1.speed(0)
+pen1.hideturtle()
+pen1.color("honeydew")
+pen1.goto (-60, 280)
+pen1.color("black")
+pen1.write("Score = ", move=False, align="left", font=("Helvetica", 18,"normal"))
 
 
 delay = 0.8
@@ -28,7 +39,9 @@ def add(counter):
 class Shape():
     x=5
     y=0
-    choice= random.randint(0,7)
+    height=0
+    length=0
+    choice= random.randint(0,6)
     if (choice==0):
         color=4
         shape= [[4,4],[4,4]]
@@ -77,25 +90,34 @@ class Shape():
         length=3
 
 def erase(self, grid):
-    for y in range (self.height):
-        for x in range (self.length):
-            if (self.shape[x][y] >0):
-                grid[self.y+y][self.x+x] = 0
+    for g in range (len(self.shape)):
+        for f in range (len(self.shape[g])):
+            if (self.shape[g][f] >0):
+                grid[self.y+g][self.x+f] =0
+    
                    
 def moveLeft(self,grid):
     if (self.x > 0):
         if (grid [self.y][self.x -1] ==0):
-            self.erase(grid)
+            erase(self,grid)
             self.x -=1
+            
 def moveRight(self,grid):
     if (self.x < 12 - self.length):
         if (grid [self.y][self.x + self.length] ==0):
-            self.erase(grid)
+            erase(self,grid)
             self.x +=1
+            
 def moveDown(self,grid):
-    self.y+=1
+    if (canMove):
+        erase(self,grid)
+        self.y +=1
+    
 def accelerate(self,grid):
-    self.y+=3
+    if (canMove):
+        for x in range (self.length):
+            if (grid[self.y +self.height +3][self.x] ==0):
+                self.y+=3
 
 def canMove(self, grid):
     check=True
@@ -177,64 +199,66 @@ def flip(self):
         self.height= len(shape)
         self.length= len(shape[0])
 
-
-wn.listen()
-wn.onkeypress(moveLeft,"Left")
-wn.onkeypress(moveRight,"Right")
-wn.onkeypress(accelerate,"Down")
+self= Shape()
     
 grid =[
-      [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
-      [9,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9],
-      [9,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9],
-      [9,8,8,1,1,1,1,1,1,1,1,1,1,1,1,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9],
-      [9,8,8,0,1,2,3,4,5,6,7,0,1,2,3,8,8,9],
-      [9,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9],
-      [9,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9],
-      [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]]
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 2, 3, 4, 4, 5, 6, 7, 5, 3, 2, 1]]
 
 
+wn.listen()
+wn.onkeypress(moveLeft(self,grid),"Left")
+wn.onkeypress(moveRight(self,grid),"Right")
+wn.onkeypress(accelerate(self,grid),"Down")
 
 pen= turtle.Turtle()
 pen.penup()
+pen.hideturtle()
 pen.speed(0)
 pen.shape("square")
 pen.setundobuffer(None)
 
-        
+Pen = turtle.Turtle()
+Pen.penup()
+Pen.hideturtle()
+Pen.speed(0)
+Pen.shape("square")
+#Pen.setundobuffer(None)
+
+
+colors= ["black","royalblue","mediumturquoise","darkorange","yellow","green", "mediumorchid","firebrick","gold","goldenrod"]
+
 def draw_grid(pen,grid):
     pen.clear()
-    top=280
-    left=-170
+    top=230
+    left=-110
     # 180 =x, 340=y
-    colors= ["black","royalblue","mediumturquoise","darkorange","yellow","green", "mediumorchid","firebrick","gold","goldenrod"]
-    
             
     for y in range (len(grid)):
         for x in range (len(grid[0])):
-            screen_x= left + (x * 20)
+            screen_x= left+ (x * 20)
             screen_y= top - (y * 20)
             color1= colors[grid[y][x]] 
             pen.color(color1)
@@ -243,32 +267,34 @@ def draw_grid(pen,grid):
                 
 draw_grid(pen, grid)
 
-
+def drawBlock(self,grid):
+    top=230
+    left=-110
+    for g in range (0,len(self.shape)):
+        for f in range (0,len(self.shape[0])):
+            Color= self.shape[g][f]  # returns a number representing color code
+            pen.color(colors[Color])
+            coordinateX= left + 20 *(self.x +f)
+            coordinateY= top - 20*(self.y+g)
+            pen.goto(coordinateX,coordinateY)
+            pen.stamp()  
+#self= Shape()
 #main game loop
 linesFilled=0
+self = Shape()
 
 while True:
-    time.sleep(0.02)
+    time.sleep(0.01)
     wn.update()
-    
-    collision =False
 
-    #check for collision
-    #if ((self.y)-1 >0):
+    erase(self,grid)
+    drawBlock(self,grid)
+    moveDown(self,grid)
+    time.sleep(delay)
     
-    self= Shape()
-    for y in range (0, (len(self.shape)+1)):
-        for x in range (0, (len(self.shape[y])+1)):
-            screen_x= x*20
-            screen_y= y*20
-            pen.color = self.color
-            pen.goto(0,200)
-            pen.stamp()
-            wn.update()
-            time.sleep(delay)
-        
-    while (collision== False):
-        moveDown(self)
-        time.sleep(delay)
+    
+    
+    
+
 
 wn.mainloop()
